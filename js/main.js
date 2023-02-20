@@ -11,7 +11,7 @@
     const completedTaskCount = document.querySelector('.task__count--completed');
     const taskMenuBtns = document.querySelectorAll('.task__menu-icon');
     const taskMenuList = document.querySelectorAll('.task__menu-list');
-    const taskTextareaArray = document.querySelectorAll('.task__textarea');
+    let taskTextareaArray;
     let taskName;
 
     currentTaskList.innerHTML = "";
@@ -32,7 +32,7 @@
                                         <label for="check-incomplete-${numCurrent}" class="checkbox__label"></label>
                                     </div>
                                     <div class="task__content">
-                                        <textarea rows="1" class="task__heading task__textarea" disabled>${taskName}</textarea>
+                                        <textarea rows="1" class="task__heading task__textarea" maxlength="75" disabled>${taskName}</textarea>
                                     </div>
                                     <img class="task__icon-menu task__icon-menu--incomplete" src="assets/dot-menu-white.svg" alt="dot menu">
 
@@ -91,7 +91,7 @@
 
             taskIcon = `<img class="task__icon-menu task__icon-menu--${action}" src="assets/dot-menu-white.svg" alt="dot menu">`; // taskbar icon
 
-            taskContent = `<textarea rows="1" class="task__heading task__textarea" disabled>${taskName}</textarea>`; // task heading HTML content
+            taskContent = `<textarea rows="1" class="task__heading task__textarea" maxlength="75" disabled>${taskName}</textarea>`; // task heading HTML content
             taskMenu = `<div class="task__menu">
                             <ul class="task__menu-list">
                                 <li class="task__menu-item task__menu--edit">Edit</li>
@@ -165,6 +165,7 @@
         if(clicked) {
             task_Add_Remove_Action(clickedCheckbox, 'completed');
         };
+        taskTextareaArray = document.querySelectorAll('.task__textarea');
 
         // When clicking menu icon
         if(clickedMenuIcon) {
@@ -192,16 +193,14 @@
             }, 200);
         }
 
-        if(taskTextareaArray.length > 0) {
-            taskTextareaArray.forEach(textarea => {
-                textarea.addEventListener('keyup', function(e) {
-                    e.preventDefault();
-                    if(e.key == 'Enter') {
-                        taskname = textarea.value;
-                    }
-                })
-            });
-        }
+        taskTextarea.addEventListener('keydown', function(e) {
+            if (e.key == 'Enter') {
+                e.preventDefault();
+                taskTextarea.textContent = taskTextarea.value;
+                taskName = taskTextarea.value;
+                taskTextarea.setAttribute('disabled', '');
+            };
+        })
 
     })
 
@@ -224,3 +223,6 @@
         }
 
     })
+
+
+
