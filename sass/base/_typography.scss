@@ -1,0 +1,15 @@
+html {
+ /* 1rem = 10px; (default 16 so 10/16 = 0.625) */
+ font-size: 62.5%;
+ scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--default-font), sans-serif;
+  font-weight: 400;
+  font-size: var(--default-font-size);
+  line-height: 1.4;
+  box-sizing: border-box;
+  background-color: var(--body-color);
+  color: var(--text-color);
+}

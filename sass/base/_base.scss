@@ -1,0 +1,47 @@
+:root {
+
+    /* color */
+    --body-color: hsl(247deg 15% 11%);
+    --primary-color: hsl(247deg 11% 15%);
+    --secondary-color: #f588b0;
+    --text-color: #d3d3d3;
+
+    /* font */
+    --default-font: 'Rubik';
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+input,textarea {
+    border: none;
+    outline: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-family: inherit;
+}
+input[type="checkbox"] {
+    display: none;
+}
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+ul {
+    list-style: none;
+}
+
+.main {
+    padding: 3.2rem 1.6rem;
+}
+.container--center {
+    width: 70rem;
+    max-width: 70rem;
+    margin: 0 auto;
+}

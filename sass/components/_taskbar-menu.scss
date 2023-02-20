@@ -1,0 +1,26 @@
+.task__menu {
+    position: absolute;
+    top: 3rem;
+    right: 2.4rem;
+    font-size: 1.5rem;
+    display: none;
+    z-index: 2;
+
+    &-list {
+        min-width: 10rem;
+        padding: .6rem 0;
+        border-radius: 12px;
+        background-color: var(--primary-color);
+        box-shadow: 0 2px 7px 0 var(--body-color);
+    }
+
+    &-item {
+        padding: 1rem 1.6rem;
+        transition: .2s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--body-color);
+        }
+    }
+}

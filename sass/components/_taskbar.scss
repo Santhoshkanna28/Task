@@ -1,0 +1,15 @@
+.task__bar {
+    border-radius: 1.6rem;
+    padding: 1.2rem 1.6rem;
+    background-color: var(--primary-color);
+    display: grid;
+    grid-template-columns: 2.4rem 1fr 2.4rem;
+    gap: 1.6rem;
+    align-items: center;
+    position: relative;
+
+    &.add-task {
+        background-color: transparent;
+        box-shadow: 0 1px 4px 1px var(--primary-color);
+    }
+}

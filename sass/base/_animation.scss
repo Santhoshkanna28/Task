@@ -1,0 +1,13 @@
+@keyframes fade-out-right {
+    0% {
+        left: 0;
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+    100% {
+        left: 30%;
+        opacity: 0;
+    }
+}

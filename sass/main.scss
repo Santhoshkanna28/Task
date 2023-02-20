@@ -1,0 +1,21 @@
+// ====== Abstract files ====== //
+// @import "abstracts/functions";
+@import "abstracts/mixins";
+// @import "abstracts/variables";
+
+// ====== Base files ====== //
+@import "base/animation";
+@import "base/base";
+@import "base/typography";
+// @import "base/utilities";
+
+// ====== Component files ====== //
+@import "components/checkbox";
+@import "components/taskbar";
+@import "components/taskbar-menu";
+
+// ====== Layout files ====== //
+
+
+// ====== Page files ====== //
+@import "pages/home";

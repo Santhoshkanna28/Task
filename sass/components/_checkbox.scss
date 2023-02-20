@@ -1,0 +1,21 @@
+/* checkbox */
+.checkbox__label {
+    display: block;
+    border: 2px solid var(--secondary-color);
+    width: 100%;
+    height: 2.4rem;
+    border-radius: 9px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* if checkbox checked  */
+
+.checkbox__input[checked="true"] + .checkbox__label {
+    background-color: var(--secondary-color);
+}
+.checkbox__input[checked="true"] + .checkbox__label::after {
+    content: "\2713";
+    color: var(--body-color);
+    font-size: 1.6rem;
+}
