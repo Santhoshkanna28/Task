@@ -48,8 +48,32 @@
     width: 1.6rem;
     justify-self: center;
 }
-
+.illustration {
+    text-align: center;
+    img {
+        max-width: 45rem;
+    }
+    h4 {
+        font-size: 2.2rem;
+    }
+    p {
+        font-size: 1.6rem;
+    }
+}
+// 
 /* Transitions and Animations */
+.fade-down {
+    animation: fadeDown .6s ease-out both;
+}
+.ilust-img-trans {
+    animation: fadeDown .6s ease-out both;
+}
+.ilust-h4-trans {
+    animation: fadeDown .6s ease-out .2s both;
+}
+.ilust-p-trans {
+    animation: fadeDown .6s ease-out .3s both;
+}
 .fade-out-right {
-    animation: fade-out-right .2s ease-out forwards; 
+    animation: fadeOutRight .2s ease-out forwards; 
 }

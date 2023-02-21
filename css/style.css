@@ -1,4 +1,4 @@
-@keyframes fade-out-right {
+@keyframes fadeOutRight {
   0% {
     left: 0;
     opacity: 1; }
@@ -7,6 +7,16 @@
   100% {
     left: 30%;
     opacity: 0; } }
+
+@keyframes fadeDown {
+  0% {
+    transform: translateY(-3rem);
+    opacity: 0; }
+  50% {
+    opacity: .5; }
+  100% {
+    transform: translateX(0);
+    opacity: 1; } }
 
 :root {
   /* color */
@@ -159,6 +169,27 @@ body {
   width: 1.6rem;
   justify-self: center; }
 
+.illustration {
+  text-align: center; }
+  .illustration img {
+    max-width: 45rem; }
+  .illustration h4 {
+    font-size: 2.2rem; }
+  .illustration p {
+    font-size: 1.6rem; }
+
 /* Transitions and Animations */
+.fade-down {
+  animation: fadeDown .6s ease-out both; }
+
+.ilust-img-trans {
+  animation: fadeDown .6s ease-out both; }
+
+.ilust-h4-trans {
+  animation: fadeDown .6s ease-out .2s both; }
+
+.ilust-p-trans {
+  animation: fadeDown .6s ease-out .3s both; }
+
 .fade-out-right {
-  animation: fade-out-right .2s ease-out forwards; }
+  animation: fadeOutRight .2s ease-out forwards; }
