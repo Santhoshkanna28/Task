@@ -5,14 +5,13 @@
     const addBtn = document.querySelector('.task__btn');
     const addTaskInput = document.getElementById('task-input');
     const taskList = document.querySelectorAll('.task__list');
+    const currentTaskListContainer = document.querySelector('.task-container--incomplete');
     const currentTaskList = document.querySelector('.task__list--incomplete');
     const completedTaskList = document.querySelector('.task__list--completed');
     const currentTaskCount = document.querySelector('.task__count--incomplete');
     const completedTaskCount = document.querySelector('.task__count--completed');
     const taskMenuBtns = document.querySelectorAll('.task__menu-icon');
     const taskMenuList = document.querySelectorAll('.task__menu-list');
-    let taskTextareaArray;
-    let taskName;
 
     currentTaskList.innerHTML = "";
     let numCurrent = 0;
@@ -20,6 +19,7 @@
 
     function addTask(){
         const taskName = addTaskInput.value;
+        const illustration = document.querySelectorAll('.illustration');
 
         if(taskName == "") return;
 
@@ -48,6 +48,12 @@
         // Empty input after adding
         addTaskInput.value = "";
 
+        // REMOVE ILLUSTRATION
+        if(illustration.length > 0) {
+            const [illstrate] = illustration;
+            illstrate.remove();
+        }
+
         // show total count of current task
         showTotalTask('incomplete');
     }
@@ -70,7 +76,7 @@
 
         // Add to completed tasks area
         numCompleted++;
-        taskName = selectedCheckbox.closest('.task__item').querySelector('.task__heading').textContent;
+        const taskName = selectedCheckbox.closest('.task__item').querySelector('.task__heading').textContent;
         const addCompletedTaskItem = document.createElement('li');
         addCompletedTaskItem.classList.add('task__item', `task__item--${action}`, `task__item--${action}-${numCompleted}`);
 
@@ -165,7 +171,6 @@
         if(clicked) {
             task_Add_Remove_Action(clickedCheckbox, 'completed');
         };
-        taskTextareaArray = document.querySelectorAll('.task__textarea');
 
         // When clicking menu icon
         if(clickedMenuIcon) {
@@ -193,15 +198,36 @@
             }, 200);
         }
 
-        taskTextarea.addEventListener('keydown', function(e) {
-            if (e.key == 'Enter') {
-                e.preventDefault();
-                taskTextarea.textContent = taskTextarea.value;
-                taskName = taskTextarea.value;
-                taskTextarea.setAttribute('disabled', '');
-            };
-        })
+        // Add task completed Illustration 
+        // setTimeout(()=> {
+        //     const taskIncompleteArray = document.querySelectorAll('.task__item--incomplete');
+        //     // console.log(taskIncompleteArray.length);
+        //     if(taskIncompleteArray.length === 0) {
+        //         const taskContainer = document.querySelector('.task-container--incomplete');
+        //         taskContainer.innerHTML = '';
+        //         const illustration = `<div class="illustration illustration--completed">
+        //                                 <img class="ilust-img-trans" src="assets/completed-illust.svg" alt="illustration2">
+        //                                 <h4 class="ilust-h4-trans">All tasks complete</h4>
+        //                                 <p class="ilust-p-trans">Nice Work!</p>
+        //                             </div>`;
+        //         taskContainer.insertAdjacentHTML('afterbegin', illustration);
+        //     }
+        // },300);
 
+    })
+
+    // Edit current task name
+    currentTaskList.addEventListener('keydown', function(e) {
+        const taskTextarea = e.target.closest('.task__heading');
+        if (e.key == 'Enter') {
+            e.preventDefault();
+            taskTextarea.setAttribute('disabled', '');
+        };
+    })
+
+    currentTaskList.addEventListener('keyup', function(e) {
+        const taskTextarea = e.target.closest('.task__heading');
+        taskTextarea.textContent = taskTextarea.value;
     })
 
     // Mark Incomplete
