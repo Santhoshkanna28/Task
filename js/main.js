@@ -1,11 +1,13 @@
 'use strict';
 
 
-    
+    const taskColumn = document.querySelector('.task__column');
+    const taskArea = document.querySelector('.task__area');
     const addBtn = document.querySelector('.task__btn');
     const addTaskInput = document.getElementById('task-input');
     const taskList = document.querySelectorAll('.task__list');
     const currentTaskListContainer = document.querySelector('.task-container--incomplete');
+    const completedTaskListContainer = document.querySelector('.task-container--completed');
     const currentTaskList = document.querySelector('.task__list--incomplete');
     const completedTaskList = document.querySelector('.task__list--completed');
     const currentTaskCount = document.querySelector('.task__count--incomplete');
@@ -13,13 +15,33 @@
     const taskMenuBtns = document.querySelectorAll('.task__menu-icon');
     const taskMenuList = document.querySelectorAll('.task__menu-list');
 
+    taskArea.style.display = "none";
+
     currentTaskList.innerHTML = "";
     let numCurrent = 0;
     let numCompleted = 0;
 
+    function removeCompletedIllustration() {
+        // REMOVE ILLUSTRATION
+        const illustration = document.querySelectorAll('.illustration');
+        if(illustration.length > 0) {
+            const totalPendingTask = currentTaskListContainer.querySelector('.task-total');
+            const [illstrate] = illustration;
+            totalPendingTask.style.display = 'block';
+            currentTaskListContainer.classList.add('fade-down');
+            illstrate.remove();
+
+            setTimeout(()=> {
+                currentTaskListContainer.classList.remove('fade-down');
+            },700)
+        }
+    }
+
     function addTask(){
         const taskName = addTaskInput.value;
-        const illustration = document.querySelectorAll('.illustration');
+        
+        taskArea.style.display = "block";
+        removeCompletedIllustration(); // REMOVE COMPLETED ILLUSTRATION
 
         if(taskName == "") return;
 
@@ -47,12 +69,6 @@
 
         // Empty input after adding
         addTaskInput.value = "";
-
-        // REMOVE ILLUSTRATION
-        if(illustration.length > 0) {
-            const [illstrate] = illustration;
-            illstrate.remove();
-        }
 
         // show total count of current task
         showTotalTask('incomplete');
@@ -141,6 +157,37 @@
         }
     }
 
+    function addCompletedIllustration () {
+        const taskIncompleteArray = document.querySelectorAll('.task__item--incomplete');
+        if(taskIncompleteArray.length === 0) {
+            const taskContainer = document.querySelector('.task-container--incomplete');
+            const illustration = `<div class="illustration illustration--completed">
+                                    <img class="ilust-img-trans" src="assets/completed-illust.svg" alt="illustration2">
+                                    <h4 class="ilust-h4-trans">All tasks complete</h4>
+                                    <p class="ilust-p-trans">Nice Work!</p>
+                                </div>`;
+            taskContainer.insertAdjacentHTML('beforeend', illustration);
+            taskContainer.querySelector('.task-total').style.display = 'none';
+        }
+    }
+
+    function addMainIllustration () {
+        const taskIncompleteArray = document.querySelectorAll('.task__item--incomplete');
+        const taskCompleteArray = document.querySelectorAll('.task__item--completed');
+        if(taskIncompleteArray.length === 0 && taskCompleteArray.length === 0) {
+            taskArea.style.display = "none";
+            const illustration = `<div class="illustration illustration--completed">
+                                    <img class="ilust-img-trans" src="assets/completed-illust.svg" alt="illustration2">
+                                    <h4 class="ilust-h4-trans">All tasks complete</h4>
+                                    <p class="ilust-p-trans">Nice Work!</p>
+                                </div>`;
+            taskContainer.insertAdjacentHTML('beforeend', illustration);
+            taskContainer.querySelector('.task-total').style.display = 'none';
+        }
+    }
+
+
+
 
     // Add task button click
     addBtn.addEventListener('click', function(e){
@@ -170,6 +217,11 @@
 
         if(clicked) {
             task_Add_Remove_Action(clickedCheckbox, 'completed');
+
+            // Add task completed Illustration 
+            setTimeout(()=> {
+                addCompletedIllustration();
+            },220);
         };
 
         // When clicking menu icon
@@ -190,29 +242,16 @@
 
         // When delete btn in menu is clicked
         if(taskDeleteBtn) {
-            console.log('click');
             taskItem.classList.add('fade-out-right');
             setTimeout(()=> {
                 taskItem.remove();
                 showTotalTask('incomplete');
             }, 200);
-        }
 
-        // Add task completed Illustration 
-        // setTimeout(()=> {
-        //     const taskIncompleteArray = document.querySelectorAll('.task__item--incomplete');
-        //     // console.log(taskIncompleteArray.length);
-        //     if(taskIncompleteArray.length === 0) {
-        //         const taskContainer = document.querySelector('.task-container--incomplete');
-        //         taskContainer.innerHTML = '';
-        //         const illustration = `<div class="illustration illustration--completed">
-        //                                 <img class="ilust-img-trans" src="assets/completed-illust.svg" alt="illustration2">
-        //                                 <h4 class="ilust-h4-trans">All tasks complete</h4>
-        //                                 <p class="ilust-p-trans">Nice Work!</p>
-        //                             </div>`;
-        //         taskContainer.insertAdjacentHTML('afterbegin', illustration);
-        //     }
-        // },300);
+            setTimeout(()=> {
+                addCompletedIllustration();
+            },220);
+        }
 
     })
 
@@ -238,6 +277,7 @@
         const taskItem = e.target.closest('.task__item');
         if(clicked) {
             task_Add_Remove_Action(clickedCheckbox, 'incomplete');
+            removeCompletedIllustration();
         }
 
         if (clickedDeleteIcon) {
@@ -250,5 +290,7 @@
 
     })
 
-
+    // taskColumn.addEventListener('click', function() {
+        
+    // })
 
