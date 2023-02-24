@@ -40,11 +40,12 @@
     function addTask(){
         const taskName = addTaskInput.value;
         
+        
+        if(taskName == "") return;
+        
         taskArea.style.display = "block";
         removeCompletedIllustration(); // REMOVE COMPLETED ILLUSTRATION
-
-        if(taskName == "") return;
-
+        
         numCurrent++;
         const addTaskItem = document.createElement('li');
         addTaskItem.classList.add('task__item', 'task__item--incomplete', `task__item--incomplete-${numCurrent}`);
