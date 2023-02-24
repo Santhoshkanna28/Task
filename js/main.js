@@ -209,6 +209,7 @@
         const clickedMenuIcon = e.target.classList.contains('task__icon-menu');
         const clickedCheckbox = e.target.closest('.checkbox__label');
         const taskItem = e.target.closest('.task__item');
+        const taskBar = e.target.closest('.task__bar');
         const taskBarMenuArray = document.querySelectorAll('.task__menu');
         const taskBarMenu = e.target.closest('.task__bar').querySelector('.task__menu');
         const taskEditBtn = e.target.classList.contains('task__menu--edit');
@@ -238,6 +239,9 @@
         if(taskEditBtn) {
             taskTextarea.removeAttribute('disabled');
             taskTextarea.select();
+
+            // taskBar.style.boxShadow = 'rgb(64 64 64) 0px 2px 8px 0px';
+            // taskBar.style.transform = 'translateY(-2px)';
         }
 
         // When delete btn in menu is clicked
@@ -290,7 +294,4 @@
 
     })
 
-    // taskColumn.addEventListener('click', function() {
-        
-    // })
 
