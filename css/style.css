@@ -34,6 +34,10 @@
   padding: 0;
   box-sizing: inherit; }
 
+::selection {
+  color: var(--body-color);
+  background-color: var(--secondary-color); }
+
 input, textarea {
   border: none;
   outline: none;
@@ -53,10 +57,9 @@ ul {
   list-style: none; }
 
 .main {
-  padding: 3.2rem 1.6rem; }
+  padding: 3.2rem 2.4rem; }
 
 .container--center {
-  width: 70rem;
   max-width: 70rem;
   margin: 0 auto; }
 
@@ -101,7 +104,8 @@ body {
   grid-template-columns: 2.4rem 1fr 2.4rem;
   gap: 1.6rem;
   align-items: center;
-  position: relative; }
+  position: relative;
+  transition: .2s; }
   .task__bar.add-task {
     background-color: transparent;
     box-shadow: 0 1px 4px 1px var(--primary-color); }
