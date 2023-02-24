@@ -12,51 +12,62 @@
 <body>
     <main class="main">
         <section class="container--center">
-            <div class="task task-container">
-                <div class="task__bar add-task">
-                    <div class="task-action">
-                        <button class="task__btn">+</button>
+            
+            <div class="task__column">
+                <div class="task-container">
+                    <div class="task__bar add-task">
+                        <div class="task-action">
+                            <button class="task__btn">+</button>
+                        </div>
+                        <div class="task__input-box">
+                            <input type="text" class="task__input" id="task-input" placeholder="Add a task">
+                        </div>
                     </div>
-                    <div class="task__input-box">
-                        <input type="text" class="task__input" id="task-input" placeholder="Add a task">
+                </div>
+
+                <div class="task__area">
+                    <!-- current task -->
+                    <div class="task-container task-container--incomplete">
+                        <p class="task-total">Tasks - <span class="task__count--incomplete">0</span></p>
+                        <ul class="task__list task__list--incomplete">
+                            <li class="task__item task__item--incomplete">
+                                <div class="task__bar">
+                                    <div class="task-action">
+                                        <input type="checkbox" class="checkbox__input" id="check-incomplete">
+                                        <label for="check-incomplete" class="checkbox__label"></label>
+                                    </div>
+                                    <div class="task__content">
+                                        <p class="task__heading">Going to Gym</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+        
+                    <!-- completed task -->
+                    <div class="task-container task-container--completed">
+                        <p class="task-total">Completed - <span class="task__count--completed">0</span></p>
+                        <ul class="task__list task__list--completed">
+                            <li class="task__item">
+                                <div class="task__bar">
+                                    <div class="task-action">
+                                        <input type="checkbox" class="checkbox__input" id="check-completed" checked>
+                                        <label for="check-completed" class="checkbox__label"></label>
+                                    </div>
+                                    <div class="task__content">
+                                        <p class="task__heading">Going to Gym</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- current task -->
-            <div class="task task-container task-container--incomplete">
-                <p class="task-total">Tasks - <span class="task__count--incomplete">0</span></p>
-                <ul class="task__list task__list--incomplete">
-                    <li class="task__item task__item--incomplete">
-                        <div class="task__bar">
-                            <div class="task-action">
-                                <input type="checkbox" class="checkbox__input" id="check-incomplete">
-                                <label for="check-incomplete" class="checkbox__label"></label>
-                            </div>
-                            <div class="task__content">
-                                <p class="task__heading">Going to Gym</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- completed task -->
-            <div class="task task-container task-container--completed">
-                <p class="task-total">Completed - <span class="task__count--completed">0</span></p>
-                <ul class="task__list task__list--completed">
-                    <li class="task__item">
-                        <div class="task__bar">
-                            <div class="task-action">
-                                <input type="checkbox" class="checkbox__input" id="check-completed" checked>
-                                <label for="check-completed" class="checkbox__label"></label>
-                            </div>
-                            <div class="task__content">
-                                <p class="task__heading">Going to Gym</p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+            <div class="illustration illustration--new">
+                <img class="ilust-img-trans" src="assets/add-task-illust.svg" alt="illustration1">
+                <h4 class="ilust-h4-trans">Looks like your task list is empty</h4>
+                <p class="ilust-p-trans">Add new task !</p>
             </div>
         </section>
     </main>
