@@ -57,11 +57,15 @@ ul {
   list-style: none; }
 
 .main {
-  padding: 3.2rem 2.4rem; }
+  padding: 3.2rem 2.4rem;
+  height: 100vh;
+  overflow: hidden; }
 
 .container--center {
   max-width: 70rem;
-  margin: 0 auto; }
+  margin: 0 auto;
+  position: relative;
+  height: calc(100vh - 6.4rem); }
 
 html {
   /* 1rem = 10px; (default 16 so 10/16 = 0.625) */
@@ -130,8 +134,24 @@ body {
     .task__menu-item:hover {
       background-color: var(--body-color); }
 
+.toast {
+  position: absolute;
+  bottom: -3.2rem;
+  right: 0;
+  transform: translateY(100%);
+  transition: .3s all; }
+  .toast__box {
+    bottom: 0;
+    padding: 1.6rem 2.4rem;
+    font-size: 1.6rem;
+    background-color: var(--primary-color); }
+
 .task-container {
   margin-bottom: 4.4rem; }
+
+.task__area {
+  overflow-y: auto;
+  height: calc(100vh - 6.4rem - 4.8rem - 4.4rem - 4rem); }
 
 .task__btn {
   font-size: 2.2rem;

@@ -1,6 +1,10 @@
 .task-container {
     margin-bottom: 4.4rem;
 }
+.task__area {
+    overflow-y: auto;
+    height: calc(100vh - 6.4rem - 4.8rem - 4.4rem - 4rem);
+}
 
 .task__btn {
     font-size: 2.2rem;

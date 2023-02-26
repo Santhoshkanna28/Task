@@ -1,6 +1,8 @@
 'use strict';
 
 
+    // const taskColumn = document.querySelector('.task__column');
+    const containerCenter = document.querySelector('.container--center');
     const taskColumn = document.querySelector('.task__column');
     const taskArea = document.querySelector('.task__area');
     const addBtn = document.querySelector('.task__btn');
@@ -45,14 +47,14 @@
         
         taskArea.style.display = "block";
         removeCompletedIllustration(); // REMOVE COMPLETED ILLUSTRATION
-        
+
         numCurrent++;
         const addTaskItem = document.createElement('li');
         addTaskItem.classList.add('task__item', 'task__item--incomplete', `task__item--incomplete-${numCurrent}`);
         addTaskItem.innerHTML = `<div class="task__bar">
                                     <div class="task-action">
                                         <input type="checkbox" class="checkbox__input" id="check-incomplete-${numCurrent}" >
-                                        <label for="check-incomplete-${numCurrent}" class="checkbox__label"></label>
+                                        <label for="check-incomplete-${numCurrent}" class="checkbox__label checkbox__label--incomplete"></label>
                                     </div>
                                     <div class="task__content">
                                         <textarea rows="1" class="task__heading task__textarea" maxlength="75" disabled>${taskName}</textarea>
@@ -62,7 +64,7 @@
                                     <div class="task__menu">
                                         <ul class="task__menu-list">
                                           <li class="task__menu-item task__menu--edit">Edit</li>
-                                          <li class="task__menu-item task__menu--delete">Delete</li>
+                                          <li class="task__menu-item task__delete task__menu--delete">Delete</li>
                                         </ul>
                                     </div>
                                 </div>`;
@@ -94,8 +96,8 @@
         // Add to completed tasks area
         numCompleted++;
         const taskName = selectedCheckbox.closest('.task__item').querySelector('.task__heading').textContent;
-        const addCompletedTaskItem = document.createElement('li');
-        addCompletedTaskItem.classList.add('task__item', `task__item--${action}`, `task__item--${action}-${numCompleted}`);
+        const addTaskItem = document.createElement('li');
+        addTaskItem.classList.add('task__item', `task__item--${action}`, `task__item--${action}-${numCompleted}`);
 
         
         let checkedState;
@@ -105,28 +107,28 @@
         if(action == 'completed') {
             checkedState = true; // checkbox checked state
 
-            taskIcon = `<img class="task__icon-delete task__icon-delete--${action}" src="assets/trash-white.svg" alt="trash icon">`; // taskbar icon
+            taskIcon = `<img class="task__icon-delete task__delete" src="assets/trash-white.svg" alt="trash icon">`; // taskbar icon
 
             taskContent = `<p class="task__heading">${taskName}</p>`; // task heading HTML content
             taskMenu = '';
         }else if(action == 'incomplete') {
             checkedState = false; // checkbox checked state
 
-            taskIcon = `<img class="task__icon-menu task__icon-menu--${action}" src="assets/dot-menu-white.svg" alt="dot menu">`; // taskbar icon
+            taskIcon = `<img class="task__icon-menu" src="assets/dot-menu-white.svg" alt="dot menu">`; // taskbar icon
 
             taskContent = `<textarea rows="1" class="task__heading task__textarea" maxlength="75" disabled>${taskName}</textarea>`; // task heading HTML content
             taskMenu = `<div class="task__menu">
                             <ul class="task__menu-list">
                                 <li class="task__menu-item task__menu--edit">Edit</li>
-                                <li class="task__menu-item task__menu--delete">Delete</li>
+                                <li class="task__menu-item task__delete task__menu--delete">Delete</li>
                             </ul>
                         </div>`;
             
         }
-        addCompletedTaskItem.innerHTML = ` <div class="task__bar">
+        addTaskItem.innerHTML = ` <div class="task__bar">
                                                 <div class="task-action">
                                                     <input type="checkbox" class="checkbox__input" id="check-${action}-${numCompleted}" checked="${checkedState}">
-                                                    <label for="check-${action}-${numCompleted}" class="checkbox__label"></label>
+                                                    <label for="check-${action}-${numCompleted}" class="checkbox__label checkbox__label--${action}"></label>
                                                 </div>
                                                 <div class="task__content">
                                                     ${taskContent}
@@ -136,10 +138,10 @@
                                             </div>`;
         switch (action) {
             case 'completed':
-                completedTaskList.append(addCompletedTaskItem);
+                completedTaskList.append(addTaskItem);
                 break;
             case 'incomplete':
-                currentTaskList.prepend(addCompletedTaskItem);
+                currentTaskList.prepend(addTaskItem);
                 break;
         }
         
@@ -172,18 +174,20 @@
         }
     }
 
-    function addMainIllustration () {
+    function addMainIllustration() {
         const taskIncompleteArray = document.querySelectorAll('.task__item--incomplete');
         const taskCompleteArray = document.querySelectorAll('.task__item--completed');
+        const illustrationCompleted = document.querySelectorAll('.illustration--completed');
         if(taskIncompleteArray.length === 0 && taskCompleteArray.length === 0) {
+            illustrationCompleted.length && illustrationCompleted[0].remove();
             taskArea.style.display = "none";
-            const illustration = `<div class="illustration illustration--completed">
-                                    <img class="ilust-img-trans" src="assets/completed-illust.svg" alt="illustration2">
-                                    <h4 class="ilust-h4-trans">All tasks complete</h4>
-                                    <p class="ilust-p-trans">Nice Work!</p>
-                                </div>`;
-            taskContainer.insertAdjacentHTML('beforeend', illustration);
-            taskContainer.querySelector('.task-total').style.display = 'none';
+            const illustration = document.createElement('div');
+            illustration.classList.add('illustration', 'illustration--new');
+            illustration.innerHTML = 
+                                    `<img class="ilust-img-trans" src="assets/add-task-illust.svg" alt="illustration1">
+                                    <h4 class="ilust-h4-trans">Looks like your task list is empty</h4>
+                                    <p class="ilust-p-trans">Add new task !</p>`;
+            taskArea.after(illustration);
         }
     }
 
@@ -191,7 +195,7 @@
 
 
     // Add task button click
-    addBtn.addEventListener('click', function(e){
+    addBtn.addEventListener('click', function(){
         addTask();
     });
 
@@ -220,7 +224,7 @@
         if(clicked) {
             task_Add_Remove_Action(clickedCheckbox, 'completed');
 
-            // Add task completed Illustration 
+            // Add task completed Illustration (Only if all tasks are completed)
             setTimeout(()=> {
                 addCompletedIllustration();
             },220);
@@ -255,6 +259,7 @@
 
             setTimeout(()=> {
                 addCompletedIllustration();
+                addMainIllustration();
             },220);
         }
 
@@ -287,10 +292,13 @@
 
         if (clickedDeleteIcon) {
             taskItem.classList.add('fade-out-right');
+            const taskItemIncomplete = document.querySelectorAll('.task__item--incomplete');
             setTimeout(()=> {
                 taskItem.remove();
                 showTotalTask('completed');
+                addMainIllustration();
             }, 200);
+
         }
 
     })

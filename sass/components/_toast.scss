@@ -1,0 +1,15 @@
+.toast {
+    position: absolute;
+    bottom: -3.2rem;
+    right: 0;
+    transform: translateY(100%);
+    transition: .3s all;
+
+    &__box {
+        bottom: 0;
+        padding: 1.6rem 2.4rem;
+        font-size: 1.6rem;
+        background-color:var(--primary-color);
+    }
+
+}
